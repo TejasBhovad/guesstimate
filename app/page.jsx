@@ -52,9 +52,10 @@ const Page = () => {
   };
 
   return (
-    <div className="w-full h-full flex overflow-x-hidden">
+    <div className="w-full h-full flex overflow-x-hidden pt-16">
+      hfhfhfh
       {/* abslte score card */}
-      <div className="absolute top-0 left-0 p-4">
+      {/* <div className="absolute top-0 left-0 p-4">
         <span className="font-semibold">
           Score:{" "}
           {
@@ -62,8 +63,7 @@ const Page = () => {
             cards.length - 1
           }
         </span>
-      </div>
-
+      </div> */}
       <div className="w-1/2 h-full flex items-center justify-center overflow-x-hidden">
         {cards.slice(0, cardCount).map((position, index) => (
           <Card
