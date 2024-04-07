@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Card from "./components/Card";
+import Arrow from "./components/icons/Arrow";
 
 const Page = () => {
   const [cards, setCards] = useState([{ x: 0, y: 0, rotate: 5 }]);
@@ -53,7 +54,6 @@ const Page = () => {
 
   return (
     <div className="w-full h-full flex overflow-x-hidden pt-16">
-      hfhfhfh
       {/* abslte score card */}
       {/* <div className="absolute top-0 left-0 p-4">
         <span className="font-semibold">
@@ -85,16 +85,18 @@ const Page = () => {
         ))}
         <div className="control absolute z-30">
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+            className="bg-green-500 text-white px-4 py-2 rounded-lg"
             onClick={handleClick}
           >
-            Move Card
+            <Arrow/>
           </button>
           <button
             className="bg-red-500 text-white px-4 py-2 rounded-lg mt-2"
             onClick={handleAlert}
           >
-            Lose Game
+            <div className="rotate-180">
+              <Arrow />
+            </div>
           </button>
         </div>
       </div>

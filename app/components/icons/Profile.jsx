@@ -4,8 +4,8 @@ function Profile() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="14"
-      height="14"
+      width="50"
+      height="30"
       viewBox="0 0 20 20"
     >
       <g fill="none" fillRule="evenodd" stroke="none" strokeWidth="1">
