@@ -9,14 +9,14 @@ const Navbar = () => {
       </div>
 
       <div className="ml-16 flex-grow flex justify-center">
-        <div className="bg-blue-200 px-4 py-2 rounded-lg">
-          <p className="text-gray-700">Score : 69</p>
+        <div className="bg-buttonColor px-4 py-2 rounded-lg">
+          <p className="text-white">Score : 69</p>
         </div>
       </div>
 
-        <div className="mr-8 bg-blue-200 px-4 py-2 rounded-lg flex items-center">
+        <div className="mr-8 bg-buttonColor bg-blue-200 px-4 py-2 rounded-lg flex items-center">
           <Trophy/>
-          <p className="text-gray-700">: 420</p>
+          <p className="text-white">: 420</p>
         </div>
     </div>
   );
