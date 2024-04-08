@@ -1,15 +1,15 @@
 import React from "react";
 
-function Icon() {
+function Trophy() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       viewBox="0 0 512 512"
-      height="20"
-      width="20"
+      height="18"
+      width="18"
       xmlSpace="preserve"
-      >
+    >
       <path fill="#F6E27D" d="M220.279 306.605H291.721V401.861H220.279z"></path>
       <path fill="#F5DC60" d="M256 306.605H291.721V401.861H256z"></path>
       <path
@@ -36,4 +36,4 @@ function Icon() {
   );
 }
 
-export default Icon;
+export default Trophy;

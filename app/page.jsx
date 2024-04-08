@@ -2,27 +2,33 @@
 import React, { useState, useEffect } from "react";
 import Card from "./components/Card";
 import Arrow from "./components/icons/Arrow";
-
+import { ScoreContext } from "./context/context-wrapper";
+import { useContext } from "react";
 const Page = () => {
-  const [cards, setCards] = useState([{ x: 0, y: 0, rotate: 5 }]);
+  const { score, setScore, highscore, setHighscore } = useContext(ScoreContext);
+  const [cards, setCards] = useState([{ x: 0, y: -75, rotate: 5 }]);
   const [cardCount, setCardCount] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
 
   const handleClick = () => {
     setCards((prevCards) => {
-      // Create a copy of the previous cards
       const newCards = [...prevCards];
-      // Target the right-hand card and change its position
       newCards[newCards.length - 1] = {
         ...newCards[newCards.length - 1],
         x: -window.innerWidth / 2,
+        y: -75,
         rotate: newCards.length % 2 === 0 ? 2.5 : -2.5,
       };
-      newCards.push({ x: 0, y: 0, rotate: 5 });
+      newCards.push({ x: 0, y: -75, rotate: 5 });
 
       return newCards;
     });
   };
-  // center leftmost stack of cards on leftmost center
   useEffect(() => {
     const resizeHandler = () => {
       setCards((prevCards) => {
@@ -48,23 +54,38 @@ const Page = () => {
       window.removeEventListener("resize", resizeHandler);
     };
   }, [cardCount]);
+
   const handleAlert = () => {
     alert("You lose");
+    // reset score context
+    setScore(0);
+    // reset cards
+    setCards([{ x: 0, y: -100, rotate: 5 }]);
+    handleClick();
   };
+
+  const updateHighscore = (newScore) => {
+    if (newScore > highscore) {
+      setHighscore(newScore);
+    }
+  };
+
+  useEffect(() => {
+    setScore(cards.length - 1 - 1);
+    // console.log("highscore updated", score, highscore);
+    updateHighscore(cards.length - 1 - 1);
+  }, [cards.length]);
+
+  // enable handle click on load
+  useEffect(() => {
+    if (isMounted) {
+      handleClick();
+    }
+  }, [isMounted]);
 
   return (
     <div className="w-full h-full flex overflow-x-hidden pt-16">
-      {/* abslte score card */}
-      {/* <div className="absolute top-0 left-0 p-4">
-        <span className="font-semibold">
-          Score:{" "}
-          {
-            // length of cards array minus 1
-            cards.length - 1
-          }
-        </span>
-      </div> */}
-      <div className="w-1/2 h-full flex items-center justify-center overflow-x-hidden">
+      <div className="w-1/2 h-full flex items-center justify-center overflow-x-hidden flex flex-col border-r-4 border-opacity-75">
         {cards.slice(0, cardCount).map((position, index) => (
           <Card
             key={index}
@@ -73,8 +94,14 @@ const Page = () => {
             selected={index === cards.length - 1}
           />
         ))}
+        <div className="w-full h-3/4 "></div>
+        <div className="w-full h-1/4 flex items-center justify-center gap-4">
+          <span className="font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white italic opacity-85 text-center">
+            69420M Streams
+          </span>
+        </div>
       </div>
-      <div className="w-1/2 h-full bg-blue-300 flex items-center justify-center overflow-x-hidden">
+      <div className="w-1/2 h-full flex items-center justify-center overflow-x-hidden">
         {cards.slice(cardCount).map((position, index) => (
           <Card
             key={index}
@@ -83,21 +110,24 @@ const Page = () => {
             selected={index === cards.length - 1}
           />
         ))}
-        <div className="control absolute z-30">
-          <button
-            className="bg-green-500 text-white px-4 py-2 rounded-lg"
-            onClick={handleClick}
-          >
-            <Arrow/>
-          </button>
-          <button
-            className="bg-red-500 text-white px-4 py-2 rounded-lg mt-2"
-            onClick={handleAlert}
-          >
-            <div className="rotate-180">
+        <div className="control z-30 w-full h-full">
+          <div className="w-full h-3/4 "></div>
+          <div className="w-full h-1/4 flex items-center justify-center gap-4 sm:gap-6 md:gap-8">
+            <button
+              className="w-16 h-12 sm:w-20 sm:h-16 md:w-24 md:h-20 lg:w-32 lg:h-24 flex items-center justify-center bg-green-500 text-white px-4 py-2 rounded-lg hover:scale-105 transition-all duration-300 ease-in-out border-4 border-white"
+              onClick={handleClick}
+            >
               <Arrow />
-            </div>
-          </button>
+            </button>
+            <button
+              className="w-16 h-12 sm:w-20 sm:h-16 md:w-24 md:h-20 lg:w-32 lg:h-24 flex items-center justify-center bg-red-500 text-white px-4 py-2 rounded-lg hover:scale-105 transition-all duration-300 ease-in-out border-4 border-white"
+              onClick={handleAlert}
+            >
+              <div className="rotate-180">
+                <Arrow />
+              </div>
+            </button>
+          </div>
         </div>
       </div>
     </div>

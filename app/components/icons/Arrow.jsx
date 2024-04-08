@@ -1,13 +1,13 @@
 import React from "react";
 
-function Icon() {
+function Arrow() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="30"
       height="30"
       fill="none"
-      viewBox="0 0 73 73"
+      viewBox="0 0 72 72"
     >
       <g clipPath="url(#clip0_39_2)">
         <path
@@ -28,4 +28,4 @@ function Icon() {
   );
 }
 
-export default Icon;
+export default Arrow;
