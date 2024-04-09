@@ -7,7 +7,7 @@ const Card = ({ position, selected, number }) => {
     <div className="flex flex-col absolute">
       <motion.div
         // set shadow-lg to card when selected and shadow-md when not selected
-        className={`w-72 h-96 bg-white rounded-lg p-2 card ${
+        className={`w-72 h-96 bg-white rounded-xl p-2 card border-[12px] border-white ${
           selected ? "shadow-lg" : "shadow-md"
         }`}
         initial={{ opacity: 0, x: 200, y: -50, rotate: 30 }}

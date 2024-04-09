@@ -30,7 +30,7 @@ const Navbar = () => {
           highscoreUpdated ? "pulse" : ""
         }`}
       >
-        <p className="text-white">{highscore}</p> <Trophy />
+        <Trophy /> <p className="text-white">: {highscore}</p> 
       </div>
     </div>
   );
