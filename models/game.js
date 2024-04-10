@@ -21,7 +21,7 @@ try {
         required: true,
         trim: true,
       },
-      ranking: {
+      popularity: {
         type: Number,
         default: 0,
       },

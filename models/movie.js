@@ -21,7 +21,7 @@ try {
         required: true,
         trim: true,
       },
-      rating: {
+      grossRevenue: {
         type: Number,
         default: 0,
       },
