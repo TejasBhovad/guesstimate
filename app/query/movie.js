@@ -1,19 +1,14 @@
 "use client";
-// Upload brand data to the database
 
-// Function to get the user's Data by email
-const getMovies = async (email) => {
+const getMovies = async () => {
   try {
     console.log("getting movie data");
 
     const response = await fetch(`/api/movie/fetch`, {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      //   body: JSON.stringify({
-      //    ,
-      //   }),
     });
     if (!response.ok) {
       throw new Error("Something went wrong");

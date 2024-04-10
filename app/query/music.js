@@ -2,7 +2,7 @@
 // Upload brand data to the database
 
 // Function to get the user's Data by email
-const getSongs = async (email) => {
+const getSongs = async () => {
   try {
     console.log("getting music data");
 
@@ -11,9 +11,6 @@ const getSongs = async (email) => {
       headers: {
         "Content-Type": "application/json",
       },
-      //   body: JSON.stringify({
-      //    ,
-      //   }),
     });
     if (!response.ok) {
       throw new Error("Something went wrong");

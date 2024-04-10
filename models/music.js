@@ -9,23 +9,26 @@ try {
   // If it doesn't exist, define the model
   Song = model(
     "Song",
-    new Schema({
-      name: {
-        type: String,
-        required: true,
-        trim: true,
-      },
+    new Schema(
+      {
+        name: {
+          type: String,
+          required: true,
+          trim: true,
+        },
 
-      image: {
-        type: String,
-        required: true,
-        trim: true,
+        image: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+        streams: {
+          type: Number,
+          default: 0,
+        },
       },
-      streams: {
-        type: Number,
-        default: 0,
-      },
-    })
+      { collection: "music" }
+    )
   );
 }
 

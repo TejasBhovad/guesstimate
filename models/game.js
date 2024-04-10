@@ -9,23 +9,26 @@ try {
   // If it doesn't exist, define the model
   Game = model(
     "Game",
-    new Schema({
-      name: {
-        type: String,
-        required: true,
-        trim: true,
-      },
+    new Schema(
+      {
+        name: {
+          type: String,
+          required: true,
+          trim: true,
+        },
 
-      image: {
-        type: String,
-        required: true,
-        trim: true,
+        image: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+        popularity: {
+          type: Number,
+          default: 0,
+        },
       },
-      popularity: {
-        type: Number,
-        default: 0,
-      },
-    })
+      { collection: "game" }
+    )
   );
 }
 

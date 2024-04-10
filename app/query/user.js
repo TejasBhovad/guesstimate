@@ -1,37 +1,21 @@
-"use client";
-// Upload brand data to the database
-const uploadUser = async (data) => {
-  try {
-    console.log("uploading count data");
-    const response = await fetch(`/api/user/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    if (!response.ok) {
-      throw new Error("Something went wrong");
-    }
-  } catch (error) {
-    console.error("Failed to upload count data", error);
-  }
-};
-
+"use server";
 // Function to get the user's Data by email
 const getUser = async (email) => {
   try {
-    console.log("getting book data");
+    console.log("getting user data: ", email);
 
-    const response = await fetch(`/api/user/fetch`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/user/fetch`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+        }),
+      }
+    );
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
@@ -43,20 +27,23 @@ const getUser = async (email) => {
 };
 const updateUser = async (data) => {
   try {
-    console.log("uploading count data");
-    const response = await fetch(`/api/user/update`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    console.log("uploading user data");
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/user/update`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
   } catch (error) {
-    console.error("Failed to upload count data", error);
+    console.error("Failed to upload user data", error);
   }
 };
 
-export { uploadUser, getUser, updateUser };
+export { getUser, updateUser };

@@ -2,12 +2,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const Card = ({ position, selected, number }) => {
+const Card = ({ position, selected, number, name, data }) => {
   return (
     <div className="flex flex-col absolute">
       <motion.div
         // set shadow-lg to card when selected and shadow-md when not selected
-        className={`w-72 h-96 bg-white rounded-xl p-2 card border-[12px] border-white ${
+        className={`w-72 h-96 bg-white rounded-xl p-2 card border-[12px] border-white flex flex-col ${
           selected ? "shadow-lg" : "shadow-md"
         }`}
         initial={{ opacity: 0, x: 200, y: -50, rotate: 30 }}
@@ -22,6 +22,9 @@ const Card = ({ position, selected, number }) => {
         transition={{ type: "spring", stiffness: position.x === 0 ? 120 : 60 }} // adjust stiffness based on position.x
       >
         <span className="font-semibold">Card {number}</span>
+        <span className="font-semibold">{name}</span>
+        {/* json with formatting */}
+        <pre className="overflow-auto">{JSON.stringify(data, null, 2)}</pre>
       </motion.div>
     </div>
   );

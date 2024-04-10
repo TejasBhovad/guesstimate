@@ -9,23 +9,26 @@ try {
   // If it doesn't exist, define the model
   Movie = model(
     "Movie",
-    new Schema({
-      name: {
-        type: String,
-        required: true,
-        trim: true,
-      },
+    new Schema(
+      {
+        name: {
+          type: String,
+          required: true,
+          trim: true,
+        },
 
-      image: {
-        type: String,
-        required: true,
-        trim: true,
+        image: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+        grossRevenue: {
+          type: Number,
+          default: 0,
+        },
       },
-      grossRevenue: {
-        type: Number,
-        default: 0,
-      },
-    })
+      { collection: "movie" }
+    )
   );
 }
 

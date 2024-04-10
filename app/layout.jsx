@@ -1,8 +1,8 @@
 import { Inter } from "next/font/google";
 import Navbar from "./components/Navbar";
 import ContextProvider from "./context/context-wrapper";
+import AuthProvider from "./components/AuthProvider";
 import "./globals.css";
-import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,12 +15,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ContextProvider>
-          <main className="w-full h-full halftone">
+        <AuthProvider>
+          <ContextProvider>
             <Navbar />
-            {children}
-          </main>
-        </ContextProvider>
+
+            <main className="w-full h-full halftone pt-16">{children}</main>
+          </ContextProvider>
+        </AuthProvider>
       </body>
     </html>
   );

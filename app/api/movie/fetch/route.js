@@ -1,7 +1,7 @@
 import { connectToDB } from "@/utils/db";
 import Movie from "@/models/movie";
 export const dynamic = "force-dynamic";
-//fetch 20 songs from db
+
 export const POST = async (req, res) => {
   try {
     await connectToDB();
