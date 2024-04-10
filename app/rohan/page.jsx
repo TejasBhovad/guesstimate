@@ -6,6 +6,7 @@ import { getUser } from "../query/user";
 import { uploadUser } from "../query/user";
 import { updateUser } from "../query/user";
 import { getSongs } from "../query/music";
+import { getGames } from "../query/game";
 
 const page = () => {
   const createUser = async () => {
@@ -50,6 +51,14 @@ const page = () => {
     };
     fetchSongs();
   }, []);
+  const [gameData, setGameData] = useState(null);
+  useEffect(() => {
+    const fetchGames = async () => {
+      const games = await getGames();
+      setGameData(games);
+    };
+    fetchGames();
+  }, []);
 
   return (
     <div className="w-full h-full flex items-center justify-center flex-col">
@@ -59,6 +68,8 @@ const page = () => {
       {songData && <p>{JSON.stringify(songData)}</p>}
 
       <button onClick={updateUserData}>Update User</button>
+      {/* button for games */}
+      {gameData && <p>{JSON.stringify(gameData)}</p>}
     </div>
   );
 };
