@@ -31,8 +31,8 @@ const handler = NextAuth({
             highscore: 0,
             stats: {
               gamesPlayed: 0,
-              gamesWon: 0,
-              gamesLost: 0,
+              incorrectGuesses: 0,
+              totalCardsPlayed: 0,
             },
           };
           const newUser = new User(UserData);

@@ -16,6 +16,7 @@ export const POST = async (req, res) => {
     user.highscore = highscore;
     user.stats = stats;
     await user.save();
+    return new Response(JSON.stringify(user), { status: 200 });
     console.log("User updated successfully");
   } catch (error) {
     return new Response(JSON.stringify(error), { status: 500 });

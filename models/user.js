@@ -35,7 +35,7 @@ try {
         type: Object,
         default: {
           gamesPlayed: 0,
-          correctGuesses: 0,
+          incorrectGuesses: 0,
           totalCardsPlayed: 0,
         },
       },

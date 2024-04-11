@@ -5,7 +5,7 @@ const getMovies = async () => {
     console.log("getting movie data");
 
     const response = await fetch(`/api/movie/fetch`, {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -16,7 +16,7 @@ const getMovies = async () => {
     const movies = await response.json();
     return movies;
   } catch (error) {
-    console.error("Failed to fetch user data", error);
+    console.error("Failed to fetch movies data", error);
   }
 };
 

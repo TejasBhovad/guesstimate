@@ -6,9 +6,16 @@ import { getMovies } from "@/app/query/movie";
 import Card from "@/app/components/Card";
 import { ScoreContext } from "@/app/context/context-wrapper";
 import Arrow from "@/app/components/icons/Arrow";
-
+import { useSession } from "next-auth/react";
+import { updateUser, getUser } from "@/app/query/user";
 const Page = ({ params }) => {
+  const { data: session, status } = useSession();
   const [data, setData] = useState([]);
+  const [userStats, setUserStats] = useState({
+    gamesPlayed: 0,
+    incorrectGuesses: 0,
+    totalCardsPlayed: 0,
+  });
   const { score, setScore, highscore, setHighscore } = useContext(ScoreContext);
   const [cards, setCards] = useState([{ x: 0, y: -75, rotate: 5 }]);
   const [cardCount, setCardCount] = useState(0);
@@ -24,7 +31,7 @@ const Page = ({ params }) => {
     } else if (params.slug === "movie") {
       res = await getMovies();
     }
-
+    console.log(res);
     res = res.sort(() => Math.random() - 0.5);
     setData((prevData) => [...prevData, ...res]);
   };
@@ -34,6 +41,7 @@ const Page = ({ params }) => {
 
   useEffect(() => {
     setIsMounted(true);
+
     return () => setIsMounted(false);
   }, []);
 
@@ -116,19 +124,71 @@ const Page = ({ params }) => {
     };
   }, [cardCount]);
 
-  const handleAlert = () => {
+  const handleAlert = async () => {
     alert("You lose");
     setScore(0);
     setData([]);
+
+    // store user stats locally if not authenticated
+    if (status !== "authenticated") {
+      //  add to existing user stats
+      const userStats = JSON.parse(localStorage.getItem("userStats")) || {
+        gamesPlayed: 0,
+        incorrectGuesses: 0,
+        totalCardsPlayed: 0,
+      };
+      const updatedUserStats = {
+        ...userStats,
+        gamesPlayed: userStats.gamesPlayed + 1,
+        incorrectGuesses: userStats.incorrectGuesses + 1,
+        totalCardsPlayed: userStats.totalCardsPlayed + score,
+      };
+      localStorage.setItem("userStats", JSON.stringify(updatedUserStats));
+    } else if (status === "authenticated" && status != "waiting") {
+      const user = await getUser(session.user.email);
+      if (user) {
+        const updatedUser = {
+          ...user,
+          stats: {
+            ...user.stats,
+            gamesPlayed: user.stats.gamesPlayed + 1,
+            incorrectGuesses: user.stats.incorrectGuesses + 1,
+            totalCardsPlayed: user.stats.totalCardsPlayed + score,
+          },
+        };
+        console.log(updatedUser);
+        await updateUser(updatedUser);
+      }
+    }
+
     fetchData();
     setCards([{ x: 0, y: -100, rotate: 5 }]);
-
+    // reset user stats
+    setUserStats({
+      gamesPlayed: 0,
+      incorrectGuesses: 0,
+      totalCardsPlayed: 0,
+    });
     handleClick();
   };
 
-  const updateHighscore = (newScore) => {
+  const updateHighscore = async (newScore) => {
     if (newScore > highscore) {
       setHighscore(newScore);
+      if (session && status === "authenticated" && status != "waiting") {
+        const user = await getUser(session.user.email);
+        if (user) {
+          const updatedUser = {
+            ...user,
+            highscore: newScore,
+          };
+          await updateUser(updatedUser);
+        }
+      }
+      // if not authenticated, save to local storage
+      if (status === "unauthenticated") {
+        localStorage.setItem("highscore", newScore);
+      }
     }
   };
 
@@ -156,14 +216,20 @@ const Page = ({ params }) => {
           />
         ))}
         <div className="w-full h-3/4 "></div>
-        <div className="w-full h-1/4 flex items-center justify-center gap-4">
+        <div className="w-full h-1/4 flex flex-col items-center justify-center gap-4">
           <span className="font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white italic opacity-85 text-center">
             {data && data[currentCard]
               ? formatNumber(getRelevantField(data[currentCard]))
-              : ""}{" "}
-            {params.slug === "music" ? "Streams" : "Popularity"}{" "}
+              : ""}
+          </span>{" "}
+          <span className="font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white italic opacity-85 text-center">
+            {params.slug === "music"
+              ? "Streams"
+              : params.slug === "movie"
+              ? "Global Revenue"
+              : "Popularity"}
           </span>
-          <span>{isHigher ? "Higher" : "Lower"}</span>
+          <span className="absolute">{isHigher ? "Higher" : "Lower"}</span>
         </div>
       </div>
       <div className="w-1/2 h-full flex items-center justify-center overflow-x-hidden">

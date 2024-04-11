@@ -4,7 +4,7 @@ export const dynamic = "force-dynamic";
 export const POST = async (req, res) => {
   try {
     const { email } = await req.json();
-    console.log("=> Fetching count with email: " + email);
+    console.log("=> Fetching user with email: " + email);
     await connectToDB();
     const user = await User.findOne({ email });
     if (!user) {

@@ -5,7 +5,7 @@ const getGames = async () => {
     console.log("getting game data");
 
     const response = await fetch(`/api/game/fetch`, {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -14,7 +14,6 @@ const getGames = async () => {
       throw new Error("Something went wrong");
     }
     const games = await response.json();
-    console.log("games", games);
     return games;
   } catch (error) {
     console.error("Failed to fetch user data", error);
