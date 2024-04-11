@@ -23,14 +23,14 @@ const Leaderboard = () => {
           <thead>
             <tr>
               <th className="px-4 py-2 bg-blue-500 text-black border-r-2 border-white">Player Name</th>
-              <th className="px-4 py-2 bg-blue-500 text-black">High Score</th>
+              <th className="px-4 py-2 bg-blue-500 text-black border-r-2 border-white">High Score</th>
             </tr>
           </thead>
           <tbody>
             {data.sort((a, b) => b.score - a.score).map((item, index) => (
               <tr key={index} className="bg-gray-100">
                 <td className="border px-4 py-2 bg-yellow-500 border-r-2 border-white">{item.name}</td>
-                <td className="border px-4 py-2 bg-yellow-500">{item.score}</td>
+                <td className="border px-4 py-2 bg-yellow-500 border-r-2 border-white">{item.score}</td>
               </tr>
             ))}
           </tbody>
