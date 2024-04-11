@@ -2,11 +2,11 @@
 // Upload brand data to the database
 
 // Function to get the user's Data by email
-const getSongs = async () => {
+const getGoogle = async () => {
   try {
-    console.log("getting music data");
+    console.log("getting google data");
 
-    const response = await fetch(`/api/music/fetch`, {
+    const response = await fetch(`/api/google/fetch`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -15,11 +15,11 @@ const getSongs = async () => {
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
-    const songs = await response.json();
-    return songs;
+    const google = await response.json();
+    return google;
   } catch (error) {
-    console.error("Failed to fetch music data", error);
+    console.error("Failed to fetch google data", error);
   }
 };
 
-export { getSongs };
+export { getGoogle };
