@@ -1,14 +1,23 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+
 const page = () => {
   const categories = [
     { name: "Games", href: "/play/game" },
     { name: "Movies", href: "/play/movie" },
     { name: "Music", href: "/play/music" },
   ];
+
   return (
     <div className="flex flex-col items-center justify-center h-full py-2">
+      <div className="w-full flex justify-center mb-6">
+        <Link href="/leaderboard">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Go to Leaderboard
+          </button>
+        </Link>
+      </div>
       <h1 className="text-4xl mb-6 font-black italic">Choose a category</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {categories.map((category, index) => (
@@ -22,4 +31,5 @@ const page = () => {
     </div>
   );
 };
+
 export default page;
