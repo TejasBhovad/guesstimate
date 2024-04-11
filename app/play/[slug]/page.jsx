@@ -8,7 +8,9 @@ import { ScoreContext } from "@/app/context/context-wrapper";
 import Arrow from "@/app/components/icons/Arrow";
 import { useSession } from "next-auth/react";
 import { updateUser, getUser } from "@/app/query/user";
+import { useRouter } from "next/navigation";
 const Page = ({ params }) => {
+  const router = useRouter();
   const { data: session, status } = useSession();
   const [data, setData] = useState([]);
   const [userStats, setUserStats] = useState({
@@ -125,7 +127,7 @@ const Page = ({ params }) => {
   }, [cardCount]);
 
   const handleAlert = async () => {
-    alert("You lose");
+    // alert("You lose");
     setScore(0);
     setData([]);
 
@@ -170,6 +172,7 @@ const Page = ({ params }) => {
       totalCardsPlayed: 0,
     });
     handleClick();
+    router.push(`/lose?score=${score}&category=${params.slug}`);
   };
 
   const updateHighscore = async (newScore) => {

@@ -46,4 +46,27 @@ const updateUser = async (data) => {
   }
 };
 
-export { getUser, updateUser };
+const getLeaderboard = async () => {
+  try {
+    console.log("getting leaderboard data");
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/user/leaderboard`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Something went wrong");
+    }
+    const leaderboard = await response.json();
+    return leaderboard;
+  } catch (error) {
+    console.error("Failed to fetch leaderboard data", error);
+  }
+};
+
+export { getUser, updateUser, getLeaderboard };
