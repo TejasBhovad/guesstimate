@@ -1,10 +1,9 @@
-"use server";
-// Function to get the user's Data by email
+"use client";
 const getUser = async (email) => {
   try {
     console.log("getting user data: ", email);
 
-    const response = await fetch("/api/user/fetch", {
+    const response = await fetch(`/api/user/fetch`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,7 +24,7 @@ const getUser = async (email) => {
 const updateUser = async (data) => {
   try {
     console.log("uploading user data");
-    const response = await fetch("/api/user/update", {
+    const response = await fetch(`/api/user/update`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +43,7 @@ const getLeaderboard = async () => {
   try {
     console.log("getting leaderboard data");
 
-    const response = await fetch("/api/user/leaderboard", {
+    const response = await fetch(`/api/user/leaderboard`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
