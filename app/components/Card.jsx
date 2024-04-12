@@ -27,6 +27,8 @@ const Card = ({ position, selected, number, name, data }) => {
           src={data && data.image !== "" ? data.image : profileIcon}
           className="-z-20 absolute w-full h-full object-cover"
           alt=""
+          width={200}
+          height={200}
         />
         <div className="bg-black bg-opacity-60">
           {/* <span className="font-semibold">Card {number}</span> */}
