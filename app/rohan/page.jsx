@@ -1,24 +1,18 @@
+"use client";
 import React from "react";
-import Gamecard from "../components/Gamecard";
-import NamePlate from "../components/NamePlate";
-import Explore from "../components/Explore";
+import Link from "next/link";
 
 const page = () => {
   return (
-    <div class="w-full h-full flex flex-col items-center justify-start  ">
-      <div class="border-2 flex items-center justify-center text-4xl font-extrabold border-black bg-white rounded-full w-1/3 h-24 ">
-        <NamePlate />
-      </div>
-
-      <div class="pt-28">
-        <Gamecard />
-      </div>
-
-      <div className="pt-20">
-        <Explore />
-      </div>
-    </div>
+    <div className="w-full flex justify-center mb-6">
+    <Link href="/leaderboard">
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Go to Leaderboard
+      </button>
+    </Link>
+  </div>;
   );
 };
 
 export default page;
+

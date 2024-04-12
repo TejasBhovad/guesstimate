@@ -1,35 +1,24 @@
 "use client";
 import React from "react";
-import Link from "next/link";
+import Gamecard from "./components/Gamecard";
+import NamePlate from "./components/NamePlate";
+import Explore from "./components/Explore";
 
 const page = () => {
-  const categories = [
-    { name: "Games", href: "/play/game" },
-    { name: "Movies", href: "/play/movie" },
-    { name: "Music", href: "/play/music" },
-  ];
-
   return (
-    <div className="flex flex-col items-center justify-center h-full py-2">
-      <div className="w-full flex justify-center mb-6">
-        <Link href="/leaderboard">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Go to Leaderboard
-          </button>
-        </Link>
+    <div class="w-full h-full flex flex-col items-center justify-start  ">
+      <div class="border-2 flex items-center justify-center text-4xl font-extrabold border-black bg-white rounded-full w-1/3 h-24 ">
+        <NamePlate />
       </div>
-      <h1 className="text-4xl mb-6 font-black italic">Choose a category</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {categories.map((category, index) => (
-          <Link key={index} href={category.href}>
-            <div className="bg-white p-6 rounded-lg text-black text-center shadow-md hover:scale-105 transition-all duration-250 outline-4 outline-buttonColor outline font-semibold italic">
-              {category.name}
-            </div>
-          </Link>
-        ))}
+
+      <div class="pt-28">
+        <Gamecard />
+      </div>
+
+      <div className="pt-20">
+        <Explore />
       </div>
     </div>
   );
 };
-
 export default page;
