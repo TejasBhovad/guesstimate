@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 export const POST = async (req, res) => {
   try {
     await connectToDB();
-    const game = await Game.aggregate([{ $sample: { size: 20 } }]);
+    const games = await Game.aggregate([{ $sample: { size: 20 } }]);
 
     // console.log("=> Fetching games");
     // console.log("games", games);

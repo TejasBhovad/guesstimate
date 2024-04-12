@@ -98,21 +98,21 @@ const Navbar = () => {
         ))}
 
       <div className="ml-16 flex-grow flex justify-center">
-        {" "}
         {pathname.match(/\/play\/.*/) && (
           <div className="bg-buttonColor px-4 py-2 rounded-lg">
             <p className="text-white">Score: {score}</p>
           </div>
         )}
       </div>
-
-      <div
-        className={`mr-8 bg-buttonColor bg-blue-200 px-4 py-2 rounded-lg flex items-center gap-2 ${
-          highscoreUpdated ? "pulse" : ""
-        }`}
-      >
-        <p className="text-white font-semibold">{highscore}</p> <Trophy />
-      </div>
+      <Link href="/leaderboard">
+        <div
+          className={`mr-8 bg-buttonColor bg-blue-200 px-4 py-2 rounded-lg flex items-center gap-2 ${
+            highscoreUpdated ? "pulse" : ""
+          }`}
+        >
+          <p className="text-white font-semibold">{highscore}</p> <Trophy />
+        </div>
+      </Link>
     </div>
   );
 };
