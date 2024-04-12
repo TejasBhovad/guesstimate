@@ -8,7 +8,7 @@ const Card = ({ position, selected, number, name, data, category }) => {
     <div className="flex flex-col absolute">
       <motion.div
         // set shadow-lg to card when selected and shadow-md when not selected
-        className={`w-72 h-96 bg-white rounded-xl card border-[12px] border-white flex flex-col ${
+        className={`w-48 h-72 sm:w-72 sm:h-96 bg-white rounded-xl card border-[12px] border-white flex flex-col ${
           selected ? "shadow-lg" : "shadow-md"
         }`}
         initial={{ opacity: 0, x: 200, y: -50, rotate: 30 }}
@@ -24,15 +24,17 @@ const Card = ({ position, selected, number, name, data, category }) => {
       >
         <Image
           src={
-            category && category
+            data && data.image !== ""
+              ? data.image
+              : category
               ? category === "google"
                 ? "/google.png"
                 : category === "music"
                 ? "/music.png"
-                : category === "games"
-                ? "/games.png"
-                : category === "movies"
-                ? "/movies.png"
+                : category === "game"
+                ? "/game.jpg"
+                : category === "movie"
+                ? "/movies.jpg"
                 : ""
               : ""
           }

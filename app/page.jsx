@@ -6,7 +6,7 @@ import MoviesIcon from "./components/icons/MoviesIcon";
 import MusicIcon from "./components/icons/MusicIcon";
 import GoogleIcon from "./components/icons/GoogleIcon";
 
-import CategoryCard from "./components/GameCard";
+import CategoryCard from "./components/CategoryCard";
 const page = () => {
   const list = [
     {

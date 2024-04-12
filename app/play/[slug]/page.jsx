@@ -240,7 +240,7 @@ const Page = ({ params }) => {
               ? "Popularity"
               : "Searches"}
           </span>
-          <span className="absolute">{isHigher ? "Higher" : "Lower"}</span>
+          {/* <span className="absolute">{isHigher ? "Higher" : "Lower"}</span> */}
         </div>
       </div>
       <div className="w-1/2 h-full flex items-center justify-center overflow-x-hidden">
