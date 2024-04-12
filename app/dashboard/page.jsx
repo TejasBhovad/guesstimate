@@ -84,7 +84,7 @@ const Page = () => {
           </div>
           <div className="bg-white h-full w-full rounded-lg flex flex-col text-[#0EB148] items-center justify-center">
             <span className="font-black text-7xl">
-              {totalCardsPlayed / gamesPlayed}
+              {(totalCardsPlayed / gamesPlayed).toFixed(2)}
             </span>
             <div className="bg-white w-full rounded-lg flex items-center justify-center font-bold">
               mean correct guesses

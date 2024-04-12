@@ -1,11 +1,11 @@
 import React from "react";
 
-function Icon() {
+function GameIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="100"
-      height="100"
+      width="72"
+      height="72"
       viewBox="0 0 20 20"
     >
       <path fill="none" d="M0 0H20V20H0z"></path>
@@ -14,4 +14,4 @@ function Icon() {
   );
 }
 
-export default Icon;
+export default GameIcon;

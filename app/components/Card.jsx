@@ -1,10 +1,9 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import profileIcon from "./icons/Main.jpeg";
 import Image from "next/image";
 
-const Card = ({ position, selected, number, name, data }) => {
+const Card = ({ position, selected, number, name, data, category }) => {
   return (
     <div className="flex flex-col absolute">
       <motion.div
@@ -24,7 +23,19 @@ const Card = ({ position, selected, number, name, data }) => {
         transition={{ type: "spring", stiffness: position.x === 0 ? 120 : 60 }} // adjust stiffness based on position.x
       >
         <Image
-          src={data && data.image !== "" ? data.image : profileIcon}
+          src={
+            category && category
+              ? category === "google"
+                ? "/google.png"
+                : category === "music"
+                ? "/music.png"
+                : category === "games"
+                ? "/games.png"
+                : category === "movies"
+                ? "/movies.png"
+                : ""
+              : ""
+          }
           className="-z-20 absolute w-full h-full object-cover"
           alt=""
           width={200}
@@ -37,7 +48,7 @@ const Card = ({ position, selected, number, name, data }) => {
           </span>
         </div>
         {/* json with formatting */}
-        <pre className="overflow-auto">{JSON.stringify(data, null, 2)}</pre>
+        {/* <pre className="overflow-auto">{JSON.stringify(data, null, 2)}</pre> */}
       </motion.div>
     </div>
   );

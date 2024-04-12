@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
 import { getSongs } from "@/app/query/music";
+import { getGoogle } from "@/app/query/google";
 import { getGames } from "@/app/query/game";
 import { getMovies } from "@/app/query/movie";
 import Card from "@/app/components/Card";
@@ -32,6 +33,8 @@ const Page = ({ params }) => {
       res = await getGames();
     } else if (params.slug === "movie") {
       res = await getMovies();
+    } else if (params.slug === "google") {
+      res = await getGoogle();
     }
     console.log(res);
     res = res.sort(() => Math.random() - 0.5);
@@ -63,6 +66,8 @@ const Page = ({ params }) => {
       return item.popularity;
     } else if (params.slug === "movie") {
       return item.grossRevenue;
+    } else if (params.slug === "google") {
+      return item.score;
     }
   };
   const handleClick = () => {
@@ -216,10 +221,11 @@ const Page = ({ params }) => {
             number={index}
             selected={index === cards.length - 1}
             name={data && data[index] ? data[index].name : ""}
+            category={params.slug}
           />
         ))}
-        <div className="w-full h-3/4 "></div>
-        <div className="w-full h-1/4 flex flex-col items-center justify-center gap-4">
+        <div className="w-full h-2/3 "></div>
+        <div className="w-full h-1/3 flex flex-col items-center justify-center gap-1">
           <span className="font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white italic opacity-85 text-center">
             {data && data[currentCard]
               ? formatNumber(getRelevantField(data[currentCard]))
@@ -230,7 +236,9 @@ const Page = ({ params }) => {
               ? "Streams"
               : params.slug === "movie"
               ? "Global Revenue"
-              : "Popularity"}
+              : params.slug === "game"
+              ? "Popularity"
+              : "Searches"}
           </span>
           <span className="absolute">{isHigher ? "Higher" : "Lower"}</span>
         </div>
@@ -247,6 +255,7 @@ const Page = ({ params }) => {
                 ? data[index + cardCount].name
                 : ""
             }
+            category={params.slug}
             data={data && data[index + cardCount]}
           />
         ))}

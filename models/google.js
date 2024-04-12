@@ -11,7 +11,7 @@ try {
     "Google",
     new Schema(
       {
-        title: {
+        name: {
           type: String,
           required: true,
           trim: true,

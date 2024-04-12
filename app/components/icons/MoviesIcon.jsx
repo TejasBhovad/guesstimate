@@ -1,11 +1,11 @@
 import React from "react";
 
-function Icon() {
+function MoviesIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="100"
-      height="100"
+      width="72"
+      height="72"
       viewBox="0 0 96 96"
     >
       <path
@@ -16,4 +16,4 @@ function Icon() {
   );
 }
 
-export default Icon;
+export default MoviesIcon;

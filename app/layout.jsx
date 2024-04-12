@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import ContextProvider from "./context/context-wrapper";
 import AuthProvider from "./components/AuthProvider";
 import "./globals.css";
-
+import { Suspense } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -19,7 +19,9 @@ export default function RootLayout({ children }) {
           <ContextProvider>
             <Navbar />
 
-            <main className="w-full h-full halftone pt-16">{children}</main>
+            <main className="w-full h-full halftone pt-16">
+              <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+            </main>
           </ContextProvider>
         </AuthProvider>
       </body>

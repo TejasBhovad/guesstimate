@@ -1,24 +1,54 @@
-"use client";
 import React from "react";
-import Gamecard from "./components/Gamecard";
 import NamePlate from "./components/NamePlate";
-import Explore from "./components/Explore";
 
+import GameIcon from "./components/icons/GameIcon";
+import MoviesIcon from "./components/icons/MoviesIcon";
+import MusicIcon from "./components/icons/MusicIcon";
+import GoogleIcon from "./components/icons/GoogleIcon";
+
+import CategoryCard from "./components/GameCard";
 const page = () => {
+  const list = [
+    {
+      link: "/play/music",
+      title: "Music",
+      logo: <MusicIcon />,
+    },
+    {
+      link: "/play/game",
+      title: "Game",
+      logo: <GameIcon />,
+    },
+    {
+      link: "/play/movie",
+      title: "Movie",
+      logo: <MoviesIcon />,
+    },
+    {
+      link: "/play/google",
+      title: "Google",
+      logo: <GoogleIcon />,
+    },
+  ];
   return (
-    <div class="w-full h-full flex flex-col items-center justify-start gap-20 ">
-      <div class="border-2 flex items-center justify-center text-4xl font-extrabold border-black bg-white rounded-full w-1/3 h-24 ">
+    <div className="w-full h-full items-center justify-center flex">
+      <div className="w-full h-4/5 flex gap-12 flex-col">
         <NamePlate />
-      </div>
-
-      <div class="">
-        <Gamecard />
-      </div>
-
-      <div className="">
-        <Explore />
+        <div className=" flex items-center justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4 items-center justify-center">
+            {list.map((item, index) => (
+              <CategoryCard
+                key={index}
+                name={item.title}
+                logo={item.logo}
+                link={item.link}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
+
 export default page;
