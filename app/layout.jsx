@@ -14,11 +14,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body className={inter.className}>
         <AuthProvider>
           <ContextProvider>
             <Navbar />
-
             <main className="w-full h-full halftone pt-16">
               <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
             </main>
