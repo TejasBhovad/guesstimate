@@ -23,13 +23,15 @@ const Card = ({ position, selected, number, name, data }) => {
         }}
         transition={{ type: "spring", stiffness: position.x === 0 ? 120 : 60 }} // adjust stiffness based on position.x
       >
-        <Image src={profileIcon} className='-z-20 absolute w-full h-full object-cover' alt="" />
-        <div className="bg-white opacity-60">
+        <Image
+          src={data && data.image !== "" ? data.image : profileIcon}
+          className="-z-20 absolute w-full h-full object-cover"
+          alt=""
+        />
+        <div className="bg-black bg-opacity-60">
           {/* <span className="font-semibold">Card {number}</span> */}
-          <span className="font-bold border-b-2 border-gray-300">
-            <div className="ml-[5px] mr-[5px] mt-[5px] mb-[5px] text-center">
-              {name}
-            </div>
+          <span className="font-bold text-white">
+            <div className="p-2 text-center">{name}</div>
           </span>
         </div>
         {/* json with formatting */}
