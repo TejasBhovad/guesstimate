@@ -4,18 +4,15 @@ const getUser = async (email) => {
   try {
     console.log("getting user data: ", email);
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/user/fetch`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-        }),
-      }
-    );
+    const response = await fetch("/api/user/fetch", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+      }),
+    });
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
@@ -28,16 +25,13 @@ const getUser = async (email) => {
 const updateUser = async (data) => {
   try {
     console.log("uploading user data");
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/user/update`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch("/api/user/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
@@ -50,15 +44,12 @@ const getLeaderboard = async () => {
   try {
     console.log("getting leaderboard data");
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/user/leaderboard`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch("/api/user/leaderboard", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
